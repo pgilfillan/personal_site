@@ -1,14 +1,41 @@
 {% extends 'theme/base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Paster{% endblock %}</title>
-</head>
-<body>
-    {% block content %}
-    Test paster
-    {% endblock %}
-</body>
-</html>
+{% load static %}
+
+{% block title %}
+    Paster
+{% endblock %}
+
+{% block content %}
+
+    <div class="row" style="padding-top:20px;">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <button class="btn btn-outline-success" type="button" id="saveButton">Save</button>
+          </div>
+          <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" id="saveText">
+        </div>
+    </div>
+
+    <div class="row"><h2>Pasted</h2></div>
+    <div class="row" id="entriesContainer">
+        {% for entry in entries %}
+            <div class="input-group mb-3" id="{{ entry.id }}">
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary clipboard" type="button" data-clipboard-target="#pastedtext{{ entry.id }}">Copy</button>
+              </div>
+              <input type="text" class="form-control" value="{{ entry.text }}" aria-label="" aria-describedby="basic-addon1" id="pastedtext{{ entry.id }}" readonly>
+              <div class="input-group-append">
+                <button class="btn btn-outline-danger deleteButton" type="button">Delete</button>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="{% static "paster/paster.js" %}"></script>
+{% endblock %}
