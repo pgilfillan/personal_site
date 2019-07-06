@@ -1,1 +1,1 @@
-web: gunicorn personal-site-pgilfillan.wsgi --log-file -
+web: gunicorn personal_site.wsgi --log-file -
