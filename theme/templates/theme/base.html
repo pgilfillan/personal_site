@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +7,7 @@
     {% block extra_stylesheets %}
     {% endblock %}
 
+    <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
 </head>
